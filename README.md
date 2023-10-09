@@ -3,9 +3,9 @@
 
 ## Description du Projet :
 
-"En recherche" est un jeu d'aventure unique qui vous transporte dans un monde fantastique rempli de mystères et de découvertes. Imaginez-vous plongé(e) dans un livre interactif où vous êtes le héros. Tout se passe par le biais de simples textes que vous pouvez explorer à l'aide de commandes simples, comme si vous lisiez un livre dont vous êtes le personnage principal.
+"En recherche" est un jeu d'aventure unique qui vous transporte dans un monde fantastique rempli de mystères et de découvertes. Imaginez-vous plongé·e·s dans un livre interactif où vous êtes le héros. Tout se passe textuellement que vous pouvez explorer à l'aide de commandes simples, comme si vous lisiez un livre dont vous êtes le héro.
 
-L'univers n'a pas encore de nom, certain s'entendent à dire qu'au vu des conflits entre les peuples chacun veux donner un nom différent à ce monde. D'autre dise que le créateur manque juste d'imagination pour trouver un nom correct et prononcable par le commun des mortels.
+L'univers n'a pas encore de nom, certain s'entendent à dire qu'au vu des conflits entre les peuples chacun veut donner un nom différent à ce monde. D'autre dise que le créateur manque juste d'imagination pour trouver un nom correct et prononcable par le commun des mortels.
 
 ## Caractéristiques Principales :
 
@@ -209,13 +209,13 @@ contrainte sur les classe APPARENCE_ -> L'Id_APPARENCE DOIT être présent dans 
 
 
 
-Vous pouvez trouver le MCD de la BDD sur le github : "DnD.png"! C'est un beau dessin digne d'être imprimé sur poster (surtout si on veux pouvoir lire quelque chose.)
+Vous pouvez trouver le MCD de la BDD sur le github : "DnD.png"! C'est un beau dessin digne d'être imprimé sur poster (surtout si on veut pouvoir lire quelque chose.)
 
 
 # liste des views et procédures à venir:
 ## Vues (Views) :
 	Vue des Informations du Personnage (Character Information View) :
-		Cette vue pourrait regrouper toutes les informations essentielles d'un personnage, telles que son nom, sa classe, sa race, ses statistiques, son équipement, etc.
+		Cette vue regroupera toutes les informations essentielles d'un personnage, telles que son nom, sa classe, sa race, ses statistiques, son équipement, etc.
 
 	Vue de l'équipement du Personnage (Stuff Information View) :
 		Permet de consulter l'équipement du personnage, couplée a une procédure de gestion de l'équipement pour les changement.
@@ -474,6 +474,6 @@ Vous pouvez trouver le MCD de la BDD sur le github : "DnD.png"! C'est un beau de
 
 ## Existant : 
 - Script de création de la Base de Données
-- Scriprt d'enregistrement de données dans la base (en deux épisodes)
+- Script d'enregistrement de données dans la base (en deux épisodes)
 
 # BASE ORACLE ! Portage sur PostgreSQL, MongoDB, et SQLServer a venir apres création des views et procédures.
