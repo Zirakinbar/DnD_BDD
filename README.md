@@ -473,7 +473,7 @@ Vous pouvez trouver le MCD de la BDD sur le github : "DnD.png"! C'est un beau de
 # Et plein d'autre encore!
 
 ## Existant : 
--- Script de création de la Base de Données
--- Scripr d'enregistrement de données dans la base (en deux épisodes)
+- Script de création de la Base de Données
+- Scriprt d'enregistrement de données dans la base (en deux épisodes)
 
 # BASE ORACLE ! Portage sur PostgreSQL, MongoDB, et SQLServer a venir apres création des views et procédures.
