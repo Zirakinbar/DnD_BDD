@@ -532,7 +532,8 @@
       Id NUMBER PRIMARY KEY,
       Effet VARCHAR(255),
       Id_Typeconsommable NUMBER(5),
-      CONSTRAINT fk_consommable_divers FOREIGN KEY (Id) REFERENCES DIVERS(Id)
+      CONSTRAINT fk_consommable_divers FOREIGN KEY (Id) REFERENCES DIVERS(Id),
+      CONSTRAINT fk_consommable_typecons FOREIGN KEY (Id_Typeconsommable) REFERENCES TYPECONSOMMABLE(Id)
    );
 
    -- Création de la View pour CONSOMMABLE
@@ -599,7 +600,8 @@
    CREATE TABLE RESSOURCE(
       Id NUMBER PRIMARY KEY,
       Id_Typeressource NUMBER(5),
-      CONSTRAINT fk_ressource_divers FOREIGN KEY (Id) REFERENCES DIVERS(Id)
+      CONSTRAINT fk_ressource_divers FOREIGN KEY (Id) REFERENCES DIVERS(Id),
+      CONSTRAINT fk_ressource_typeres FOREIGN KEY (Id_Typeressource) REFERENCES TYPERESSOURCE(Id)
    );
 
    -- Création de la View pour RESSOURCE
@@ -1154,7 +1156,7 @@
 
    -- Création du trigger INSTEAD OF DELETE pour V_ALLIE
       CREATE OR REPLACE TRIGGER Delete_Allie_trigger
-      INSTEAD OF DELETE ON V_PNJ
+      INSTEAD OF DELETE ON V_ALLIE
       FOR EACH ROW
       BEGIN
         -- Suppression de l'allie
