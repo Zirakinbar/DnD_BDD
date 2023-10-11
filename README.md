@@ -5,7 +5,7 @@
 
 "En recherche" est un jeu d'aventure unique qui vous transporte dans un monde fantastique rempli de mystères et de découvertes. Imaginez-vous plongé·e·s dans un livre interactif où vous êtes le héros. Tout se passe textuellement, vous pouvez explorer et progresser à l'aide de commandes simples, comme si vous lisiez un livre dont vous êtes le héros.
 
-L'univers n'a pas encore de nom, certains s'entendent à dire qu'au vue des conflits entre les peuples, chacun veut donner un nom différent à ce monde. D'autre disent que le créateur manque juste d'imagination pour trouver un nom correct et prononcable par le commun des mortels.
+L'univers n'a pas encore de nom, certains s'entendent à dire qu'aux vues des conflits entre les peuples, chacun veut donner un nom différent à ce monde. D'autres disent que le créateur manque juste d'imagination pour trouver un nom correct et prononçable par le commun des mortels.
 
 ## Caractéristiques Principales :
 
