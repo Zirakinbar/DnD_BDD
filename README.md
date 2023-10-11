@@ -3,7 +3,14 @@
 
 ## Description du Projet :
 
-"En recherche" est un jeu d'aventure unique qui vous transporte dans un monde fantastique rempli de mystères et de découvertes. Imaginez-vous plongé·e·s dans un livre interactif où vous êtes le héros. Tout se passe textuellement, vous pouvez explorer et progresser à l'aide de commandes simples, comme si vous lisiez un livre dont vous êtes le héros.
+"En recherche" est un jeu d'aventure textuel qui emmène les joueurs dans un monde imaginaire.
+
+Le jeu se joue entièrement à travers du texte, comme si vous lisiez un livre interactif où vous êtes le personnage principal. Les joueurs interagissent avec le monde en utilisant des commandes simples en texte brut pour explorer, combattre des monstres, résoudre des énigmes, collecter des objets et progresser dans l'histoire.
+
+La base de données Oracle est au cœur de ce projet, stockant toutes les informations nécessaires sur les personnages, les quêtes, les lieux, les objets, les monstres, les sorts, les compétences, et bien plus encore. Le PL/SQL est utilisé pour créer et gérer la logique de jeu, ce qui permet aux joueurs de prendre des décisions et d'influencer le déroulement de l'histoire à travers des interactions textuelles.
+
+L'un des aspects intéressants de ce projet est la possibilité pour les joueurs de choisir leur propre aventure et d'explorer un monde en constante évolution où les quêtes, les rencontres et les événements peuvent varier en fonction de leurs décisions. Cela crée une expérience de jeu immersive et interactive qui ressemble à un livre dont vous êtes le héros, mais avec une profondeur et une complexité supplémentaires grâce à l'utilisation de la base de données et du PL/SQL.
+
 
 L'univers n'a pas encore de nom, certains s'entendent à dire qu'aux vues des conflits entre les peuples, chacun veut donner un nom différent à ce monde. D'autres disent que le créateur manque juste d'imagination pour trouver un nom correct et prononçable par le commun des mortels.
 
