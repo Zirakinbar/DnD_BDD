@@ -204,8 +204,8 @@ Avec cette base de données, vous pouvez gérer de manière centralisée toutes 
 
 
 ## CONSTRAINT majeures : 
-contrainte sur la classe PERSONNAGE -> la paire Nom_Race et Nom_Classe DOIVENT être présente dans la table de liaison CLASSE_RACE
-contrainte sur les classe APPARENCE_ -> L'Id_APPARENCE DOIT être présent dans la table de liaison homonyme APPARENCEPOSSIBLE_
+contrainte sur la classe PERSONNAGE -> la paire Nom_Race et Nom_Classe DOIT être présente dans la table de liaison CLASSE_RACE
+contrainte sur les tables de liaisons APPARENCE_% -> La paire Id_% et Id_Apparence DOIT être présente dans la table de liaison homonyme APPARENCEPOSSIBLE_
 
 
 
@@ -476,4 +476,4 @@ Vous pouvez trouver le MCD de la BDD sur le github : "DnD.png"! C'est un beau de
 - Script de création de la Base de Données
 - Script d'enregistrement de données dans la base (en deux épisodes)
 
-# BASE ORACLE ! Portage sur PostgreSQL, MongoDB, MySQL, et SQLServer a venir apres création des views et procédures.
+# BASE ORACLE ! Portage sur PostgreSQL, MongoDB, MySQL, et SQLServer à venir après création des vues et procédures.
