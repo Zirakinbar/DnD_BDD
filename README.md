@@ -24,7 +24,7 @@ Vous n'avez besoin que de quelques commandes textuelles pour naviguer, interagir
 ### Le Pouvoir des Procédures :
 Tout, des déplacements aux combats, est géré de manière transparente grâce à des procédures spéciales qui rendent l'expérience fluide et immersive.
 
-"Les Chroniques de l'Éther" est bien plus qu'un simple jeu textuel, c'est une aventure interactive où votre imagination est la seule limite. Préparez-vous à vivre une expérience captivante où chaque choix compte, chaque aventure est unique et chaque recoin du monde recèle un nouveau mystère à découvrir.
+"En recherche" est bien plus qu'un simple jeu textuel, c'est une aventure interactive où votre imagination est la seule limite. Préparez-vous à vivre une expérience captivante où chaque choix compte, chaque aventure est unique et chaque recoin du monde recèle un nouveau mystère à découvrir.
 
 
 
