@@ -66,6 +66,43 @@
 	END;
 	$$ LANGUAGE plpgsql;
 
+	-- EXEMPLE DE SORTIE :
+	--                                                             formatfonctioninventaire                                                              
+	-----------------------------------------------------------------------------------------------------------------------------------------------------
+	-- ╔═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·═══╗+
+	-- ║               Inventaire de : Lichsorcerer                    ║                                                                                +
+	--                                                                                                                                                  +
+	-- ║                                Nom    ║                                                            Description        ║       Quantité        ║+
+	-- ║       ____________________________    ║       ________________________________________________________________        ║       ________        ║+
+	-- ║            Cotte de mailles en fer    ║                        Une cotte de mailles en fer pour les guerriers.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║                       Cuir de yeti    ║                      Une armure en cuir de yeti pour le froid extrême.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║                    Arc du Traqueur    ║        Un arc court utilisé par les traqueurs pour chasser les proies.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║                Fléau de la Justice    ║                       Un fléau utilisé par les juges pour l'exécution.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║          Marteau de Forgeron en Or    ║                        Un marteau en or pour des œuvres d'art uniques.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║                 Scie à Bois en Fer    ║                  Une scie en fer pour découper le bois avec précision.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║                  Scie à Bois en Or    ║                 Une scie en or pour des créations de mobilier luxueux.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║         Machine à Coudre en Argent    ║       Une machine à coudre en argent pour des créations haut de gamme.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║          Enclume d'Armurier en Fer    ║                      Une enclume en fer pour la fabrication d'armures.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║            Pioche de Mineur en Fer    ║                       Une pioche en fer pour l'extraction de minéraux.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║       Potion de Résistance Magique    ║                         Une potion qui renforce la résistance magique.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║           Élixir de Chance Modeste    ║                       Un élixir qui augmente temporairement la chance.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║                   Minerai d'Argent    ║        Un minerai précieux utilisé pour frapper des pièces de monnaie.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ╚═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·═══╝
+	--(1 ligne)
+
 -- FonctionInventaireDetail
 	-- Retourne les items détaillés présent dans l'inventaire d'un joueur cible
 	CREATE OR REPLACE FUNCTION FonctionInventaireDetail(NumPersonnage INT)
@@ -151,3 +188,46 @@
 		RETURN formatted_data;
 	END;
 	$$ LANGUAGE plpgsql;
+
+	-- EXEMPLE DE SORTIE :
+	--                                                          formatfonctioninventairedetail                                                           
+	-----------------------------------------------------------------------------------------------------------------------------------------------------
+	-- ╔═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·═══╗+
+	-- ║               Inventaire de : Lichsorcerer                    ║                                                                                +
+	--                                                                                                                                                  +
+	-- ║                                Nom    ║                                                            Description        ║       Quantité        ║+
+	-- ║       ____________________________    ║       ________________________________________________________________        ║       ________        ║+
+	-- ║            Cotte de mailles en fer    ║                        Une cotte de mailles en fer pour les guerriers.        ║       1               ║+
+	-- ║                                       Point De Vie  : 145     ║       Armure de base : 85     ║                                                +
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║                       Cuir de yeti    ║                      Une armure en cuir de yeti pour le froid extrême.        ║       1               ║+
+	-- ║                                       Point De Vie  : 130     ║       Armure de base : 75     ║                                                +
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║                    Arc du Traqueur    ║        Un arc court utilisé par les traqueurs pour chasser les proies.        ║       1               ║+
+	-- ║                                       Dégats : 35║                                                                                             +
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║                Fléau de la Justice    ║                       Un fléau utilisé par les juges pour l'exécution.        ║       1               ║+
+	-- ║                                       Dégats : 55║                                                                                             +
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║          Marteau de Forgeron en Or    ║                        Un marteau en or pour des œuvres d'art uniques.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║                 Scie à Bois en Fer    ║                  Une scie en fer pour découper le bois avec précision.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║                  Scie à Bois en Or    ║                 Une scie en or pour des créations de mobilier luxueux.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║         Machine à Coudre en Argent    ║       Une machine à coudre en argent pour des créations haut de gamme.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║          Enclume d'Armurier en Fer    ║                      Une enclume en fer pour la fabrication d'armures.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║            Pioche de Mineur en Fer    ║                       Une pioche en fer pour l'extraction de minéraux.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║       Potion de Résistance Magique    ║                         Une potion qui renforce la résistance magique.        ║       1               ║+
+	-- ║                                       Effet : Augmente la résistance aux sorts pendant 2 minutes.║                                             +
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║           Élixir de Chance Modeste    ║                       Un élixir qui augmente temporairement la chance.        ║       1               ║+
+	-- ║                                       Effet : Augmente la chance de 10% pendant 5 minutes.║                                                    +
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ║                   Minerai d'Argent    ║        Un minerai précieux utilisé pour frapper des pièces de monnaie.        ║       1               ║+
+	-- ║                                       ║                                                                               ║                       ║+
+	-- ╚═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·═══╝
+	--(1 ligne)
