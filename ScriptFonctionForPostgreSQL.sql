@@ -26,41 +26,44 @@
 		item_record RECORD;
 		max_nom_length INT;
 		max_description_length INT;
+		string_length INT;
 	BEGIN
 		-- Obtenir la longueur maximale des Champs
 		SELECT MAX(LENGTH(Nom)) INTO max_nom_length FROM FonctionInventaire(personnage_id);
 		SELECT MAX(LENGTH(Description)) INTO max_description_length FROM FonctionInventaire(personnage_id);
 
-		-- Début de la chaîne
-		formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 1) || CHR(10);
-
 		-- Ajouter le titre "Inventaire de : "
-		formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(09) || CHR(09) || 'Inventaire de : ' || (SELECT Nom FROM PERSONNAGE WHERE Id = personnage_id) || CHR(09) || CHR(09) || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(10);
+		formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || CHR(09) || 'Inventaire de : ' || (SELECT Nom FROM PERSONNAGE WHERE Id = personnage_id) || CHR(09) || CHR(09) || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(10);
 
 		--Ajouter les noms de colonne du tableau
-		formatted_data := formatted_data || CHR(10) || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(09) || lpad('Nom', max_nom_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2) || 
-						CHR(09) || lpad('Description', max_description_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2) ||
-						CHR(09) || 'Quantité' || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(10);
-		formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(09) || lpad('_', max_nom_length, '_') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 2) || 
-						CHR(09) || lpad('_', max_description_length, '_') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2) ||
-						CHR(09) || lpad('_', 8, '_') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(10);
+		formatted_data := formatted_data || CHR(10) || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || lpad('Nom', max_nom_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) || 
+						CHR(09) || lpad('Description', max_description_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) ||
+						CHR(09) || 'Quantité' || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(10);
+		formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || lpad('_', max_nom_length, '_') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 4) || 
+						CHR(09) || lpad('_', max_description_length, '_') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) ||
+						CHR(09) || lpad('_', 8, '_') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(10);
+		string_length := LENGTH((SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || lpad('Nom', max_nom_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) || 
+						CHR(09) || lpad('Description', max_description_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) ||
+						CHR(09) || 'Quantité' || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 4));
 
 
 		-- Parcourir les éléments de l'inventaire
 		FOR item_record IN (SELECT * FROM FonctionInventaire(personnage_id))
 		LOOP
 			-- Ajouter chaque élément à la chaîne en les alignant
-			formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(09) || 
-							  lpad(item_record.Nom, max_nom_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2) ||
-							  CHR(09) || lpad(item_record.Description, max_description_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2) ||
-							  CHR(09) || item_record.Qte || CHR(09) || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2);
-			formatted_data := formatted_data || CHR(10) || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(09) || lpad('', max_nom_length, ' ') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 2) || 
-							CHR(09) || lpad('', max_description_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2) ||
-							CHR(09) || lpad('', 8, ' ') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(10);
+			formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || 
+							  lpad(item_record.Nom, max_nom_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) ||
+							  CHR(09) || lpad(item_record.Description, max_description_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) ||
+							  CHR(09) || item_record.Qte || CHR(09) || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4);
+			formatted_data := formatted_data || CHR(10) || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || lpad('', max_nom_length, ' ') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 4) || 
+							CHR(09) || lpad('', max_description_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) ||
+							CHR(09) || lpad('', 8, ' ') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(10);
 		END LOOP;
 
+		-- Début de la chaîne
+		formatted_data := (SELECT Chaine FROM BYPASS WHERE Id = 1) || lpad((SELECT Chaine FROM BYPASS WHERE Id = 2), (string_length+27) , (SELECT Chaine FROM BYPASS WHERE Id = 2)) || (SELECT Chaine FROM BYPASS WHERE Id = 3) || CHR(10) || formatted_data;
 		-- Fin de la chaîne
-		formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 3);
+		formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 5) || lpad((SELECT Chaine FROM BYPASS WHERE Id = 2), (string_length+27) , (SELECT Chaine FROM BYPASS WHERE Id = 2)) || (SELECT Chaine FROM BYPASS WHERE Id = 6);
 
 		RETURN formatted_data;
 	END;
@@ -69,7 +72,7 @@
 	-- EXEMPLE DE SORTIE :
 	--                                                             formatfonctioninventaire                                                              
 	-----------------------------------------------------------------------------------------------------------------------------------------------------
-	-- ╔═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·═══╗+
+	-- ╔═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·.·:·.═══╗+
 	-- ║               Inventaire de : Lichsorcerer                    ║                                                                                +
 	--                                                                                                                                                  +
 	-- ║                                Nom    ║                                                            Description        ║       Quantité        ║+
@@ -100,7 +103,51 @@
 	-- ║                                       ║                                                                               ║                       ║+
 	-- ║                   Minerai d'Argent    ║        Un minerai précieux utilisé pour frapper des pièces de monnaie.        ║       1               ║+
 	-- ║                                       ║                                                                               ║                       ║+
-	-- ╚═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·═══╝
+	-- ╚═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·.·:·.═══╝
+	--(1 ligne)
+	--
+	--                                                              formatfonctioninventaire                                                               
+	-------------------------------------------------------------------------------------------------------------------------------------------------------
+	-- ╔═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·.·:·.═══╗+
+	-- ║               Inventaire de : Necrocleric                     ║                                                                                  +
+	--                                                                                                                                                    +
+	-- ║                             Nom       ║                                                                 Description   ║       Quantité        ║  +
+	-- ║       _________________________       ║       _____________________________________________________________________   ║       ________        ║  +
+	-- ║             Arc du Vent Céleste       ║            Un arc long qui tire des flèches guidées par les vents célestes.   ║       1               ║  +
+	-- ║                                       ║                                                                               ║                       ║  +
+	-- ║       Fouet de la Lueur Lunaire       ║       Un fouet enchanté par la lueur de la lune pour des attaques précises.   ║       1               ║  +
+	-- ║                                       ║                                                                               ║                       ║  +
+	-- ║          Machine à Coudre en Or       ║                      Une machine à coudre en or pour des vêtements de luxe.   ║       1               ║  +
+	-- ║                                       ║                                                                               ║                       ║  +
+	-- ╚═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·.·:·.═══╝
+	--(1 ligne)
+	--
+	--                                                                     formatfonctioninventaire                                                                      
+	---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	-- ╔═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·.·:·.═══╗ +
+	-- ║               Inventaire de : Aelarion                        ║                                                                                                +
+	--                                                                                                                                                                  +
+	-- ║                             Nom       ║                                                                              Description      ║       Quantité        ║+
+	-- ║       _________________________       ║       __________________________________________________________________________________      ║       ________        ║+
+	-- ║           Étoiles de l'Assassin       ║             Des étoiles de jet utilisées par les assassins pour des attaques sournoises.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║            Étoiles de la Foudre       ║       Des étoiles de jet chargées d'énergie électrique pour des attaques étourdissantes.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║              Scie à Bois en Fer       ║                                    Une scie en fer pour découper le bois avec précision.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║        Couteau de Chef en Acier       ║                      Un couteau de chef en acier pour la préparation de repas délicieux.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║              Sécateur en Cuivre       ║                           Un sécateur en cuivre pour des coupes précises dans le jardin.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║              Sécateur en Titane       ║                                       Un sécateur en titane pour des coupes impeccables.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║             Canne à Pêche en Or       ║                                       Une canne à pêche en or pour la pêche de trophées.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║       Enclume d'Armurier en Fer       ║                                        Une enclume en fer pour la fabrication d'armures.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║         Minerai de Diamant Noir       ║                             Un minerai exceptionnellement rare connu pour sa résistance.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ╚═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·.·:·.═══╝
 	--(1 ligne)
 
 -- FonctionInventaireDetail
@@ -138,52 +185,55 @@
 		item_record RECORD;
 		max_nom_length INT;
 		max_description_length INT;
+		string_length INT;
 	BEGIN
 		-- Obtenir la longueur maximale des Champs
 		SELECT MAX(LENGTH(Nom)) INTO max_nom_length FROM FonctionInventaireDetail(personnage_id);
 		SELECT MAX(LENGTH(Description)) INTO max_description_length FROM FonctionInventaireDetail(personnage_id);
 
-		-- Début de la chaîne
-		formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 1) || CHR(10);
-
 		-- Ajouter le titre "Inventaire de : "
-		formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(09) || CHR(09) || 'Inventaire de : ' || (SELECT Nom FROM PERSONNAGE WHERE Id = personnage_id) || CHR(09) || CHR(09) || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(10);
+		formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || CHR(09) || 'Inventaire de : ' || (SELECT Nom FROM PERSONNAGE WHERE Id = personnage_id) || CHR(09) || CHR(09) || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(10);
 
 		--Ajouter les noms de colonne du tableau
-		formatted_data := formatted_data || CHR(10) || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(09) || lpad('Nom', max_nom_length, ' ') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 2) || 
-						CHR(09) || lpad('Description', max_description_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2) ||
-						CHR(09) || 'Quantité' || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(10);
-		formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(09) || lpad('_', max_nom_length, '_') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 2) || 
-						CHR(09) || lpad('_', max_description_length, '_') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2) ||
-						CHR(09) || lpad('_', 8, '_') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(10);
+		formatted_data := formatted_data || CHR(10) || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || lpad('Nom', max_nom_length, ' ') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 4) || 
+						CHR(09) || lpad('Description', max_description_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) ||
+						CHR(09) || 'Quantité' || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(10);
+		formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || lpad('_', max_nom_length, '_') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 4) || 
+						CHR(09) || lpad('_', max_description_length, '_') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) ||
+						CHR(09) || lpad('_', 8, '_') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(10);
+		string_length := LENGTH((SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || lpad('Nom', max_nom_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) || 
+						CHR(09) || lpad('Description', max_description_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) ||
+						CHR(09) || 'Quantité' || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 4));
 
 
 		-- Parcourir les éléments de l'inventaire
 		FOR item_record IN (SELECT * FROM FonctionInventaireDetail(personnage_id))
 		LOOP
 			-- Ajouter chaque élément à la chaîne en les alignant
-			formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(09) || 
-							  lpad(item_record.Nom, max_nom_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2) ||
-							  CHR(09) || lpad(item_record.Description, max_description_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2) ||
-							  CHR(09) || item_record.Qte || CHR(09) || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2);
+			formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || 
+							  lpad(item_record.Nom, max_nom_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) ||
+							  CHR(09) || lpad(item_record.Description, max_description_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) ||
+							  CHR(09) || item_record.Qte || CHR(09) || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4);
 
 			IF item_record.Effet IS NOT NULL THEN
-				formatted_data := formatted_data || CHR(10) || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(09) || CHR(09) || CHR(09) || CHR(09) || CHR(09) || 'Effet : ' || item_record.Effet || (SELECT Chaine FROM BYPASS WHERE Id = 2);
+				formatted_data := formatted_data || CHR(10) || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || CHR(09) || CHR(09) || CHR(09) || CHR(09) || 'Effet : ' || item_record.Effet || (SELECT Chaine FROM BYPASS WHERE Id = 4);
 			ELSIF item_record.ArmureBase IS NOT NULL THEN
-				formatted_data := formatted_data || CHR(10) || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(09) || CHR(09) || CHR(09) || CHR(09) || CHR(09) || 'Point De Vie  : ' || item_record.PointDeVieBase|| CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(09)  || 'Armure de base : ' || item_record.ArmureBase || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2);
+				formatted_data := formatted_data || CHR(10) || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || CHR(09) || CHR(09) || CHR(09) || CHR(09) || 'Point De Vie  : ' || item_record.PointDeVieBase|| CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09)  || 'Armure de base : ' || item_record.ArmureBase || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4);
 			ELSIF item_record.DegatsBase IS NOT NULL THEN
-				formatted_data := formatted_data || CHR(10) || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(09) || CHR(09) || CHR(09) || CHR(09) || CHR(09) || 'Dégats : ' || item_record.DegatsBase || (SELECT Chaine FROM BYPASS WHERE Id = 2);
+				formatted_data := formatted_data || CHR(10) || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || CHR(09) || CHR(09) || CHR(09) || CHR(09) || 'Dégats : ' || item_record.DegatsBase || (SELECT Chaine FROM BYPASS WHERE Id = 4);
 			END IF;
 
 
 
-			formatted_data := formatted_data || CHR(10) || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(09) || lpad('', max_nom_length, ' ') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 2) || 
-							CHR(09) || lpad('', max_description_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 2) ||
-							CHR(09) || lpad('', 8, ' ') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 2) || CHR(10);
+			formatted_data := formatted_data || CHR(10) || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(09) || lpad('', max_nom_length, ' ') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 4) || 
+							CHR(09) || lpad('', max_description_length, ' ') || CHR(09) || (SELECT Chaine FROM BYPASS WHERE Id = 4) ||
+							CHR(09) || lpad('', 8, ' ') || CHR(09)  || (SELECT Chaine FROM BYPASS WHERE Id = 4) || CHR(10);
 		END LOOP;
 
+		-- Début de la chaîne
+		formatted_data := (SELECT Chaine FROM BYPASS WHERE Id = 1) || lpad((SELECT Chaine FROM BYPASS WHERE Id = 2), (string_length+27) , (SELECT Chaine FROM BYPASS WHERE Id = 2)) || (SELECT Chaine FROM BYPASS WHERE Id = 3) || CHR(10) || formatted_data;
 		-- Fin de la chaîne
-		formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 3);
+		formatted_data := formatted_data || (SELECT Chaine FROM BYPASS WHERE Id = 5) || lpad((SELECT Chaine FROM BYPASS WHERE Id = 2), (string_length+27) , (SELECT Chaine FROM BYPASS WHERE Id = 2)) || (SELECT Chaine FROM BYPASS WHERE Id = 6);
 
 		RETURN formatted_data;
 	END;
@@ -192,7 +242,7 @@
 	-- EXEMPLE DE SORTIE :
 	--                                                          formatfonctioninventairedetail                                                           
 	-----------------------------------------------------------------------------------------------------------------------------------------------------
-	-- ╔═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·═══╗+
+	-- ╔═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·.·:·.═══╗+
 	-- ║               Inventaire de : Lichsorcerer                    ║                                                                                +
 	--                                                                                                                                                  +
 	-- ║                                Nom    ║                                                            Description        ║       Quantité        ║+
@@ -229,5 +279,53 @@
 	-- ║                                       ║                                                                               ║                       ║+
 	-- ║                   Minerai d'Argent    ║        Un minerai précieux utilisé pour frapper des pièces de monnaie.        ║       1               ║+
 	-- ║                                       ║                                                                               ║                       ║+
-	-- ╚═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·═══╝
+	-- ╚═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·.·:·.═══╝
+	--(1 ligne)
+	--
+	--                                                           formatfonctioninventairedetail                                                            
+	-------------------------------------------------------------------------------------------------------------------------------------------------------
+	-- ╔═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·.·:·.═══╗+
+	-- ║               Inventaire de : Necrocleric                     ║                                                                                  +
+	--                                                                                                                                                    +
+	-- ║                             Nom       ║                                                                 Description   ║       Quantité        ║  +
+	-- ║       _________________________       ║       _____________________________________________________________________   ║       ________        ║  +
+	-- ║             Arc du Vent Céleste       ║            Un arc long qui tire des flèches guidées par les vents célestes.   ║       1               ║  +
+	-- ║                                       Dégats : 45║                                                                                               +
+	-- ║                                       ║                                                                               ║                       ║  +
+	-- ║       Fouet de la Lueur Lunaire       ║       Un fouet enchanté par la lueur de la lune pour des attaques précises.   ║       1               ║  +
+	-- ║                                       Dégats : 30║                                                                                               +
+	-- ║                                       ║                                                                               ║                       ║  +
+	-- ║          Machine à Coudre en Or       ║                      Une machine à coudre en or pour des vêtements de luxe.   ║       1               ║  +
+	-- ║                                       ║                                                                               ║                       ║  +
+	-- ╚═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·.·:·.═══╝
+	--(1 ligne)
+	--
+	--                                                                  formatfonctioninventairedetail                                                                   
+	---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	-- ╔═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·.·:·.═══╗ +
+	-- ║               Inventaire de : Aelarion                        ║                                                                                                +
+	--                                                                                                                                                                  +
+	-- ║                             Nom       ║                                                                              Description      ║       Quantité        ║+
+	-- ║       _________________________       ║       __________________________________________________________________________________      ║       ________        ║+
+	-- ║           Étoiles de l'Assassin       ║             Des étoiles de jet utilisées par les assassins pour des attaques sournoises.      ║       1               ║+
+	-- ║                                       Dégats : 35║                                                                                                             +
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║            Étoiles de la Foudre       ║       Des étoiles de jet chargées d'énergie électrique pour des attaques étourdissantes.      ║       1               ║+
+	-- ║                                       Dégats : 35║                                                                                                             +
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║              Scie à Bois en Fer       ║                                    Une scie en fer pour découper le bois avec précision.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║        Couteau de Chef en Acier       ║                      Un couteau de chef en acier pour la préparation de repas délicieux.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║              Sécateur en Cuivre       ║                           Un sécateur en cuivre pour des coupes précises dans le jardin.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║              Sécateur en Titane       ║                                       Un sécateur en titane pour des coupes impeccables.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║             Canne à Pêche en Or       ║                                       Une canne à pêche en or pour la pêche de trophées.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║       Enclume d'Armurier en Fer       ║                                        Une enclume en fer pour la fabrication d'armures.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ║         Minerai de Diamant Noir       ║                             Un minerai exceptionnellement rare connu pour sa résistance.      ║       1               ║+
+	-- ║                                       ║                                                                                               ║                       ║+
+	-- ╚═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·.·:·.═══╝
 	--(1 ligne)
