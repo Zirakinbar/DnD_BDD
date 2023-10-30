@@ -10774,8 +10774,9 @@
    INSERT INTO PERSONNAGE_CARACTERISTIQUE (Id_Personnage, Id_Caracteristique, Valeur) VALUES (95, 12, 58);
 
 -- BYPASS pour le style
-   INSERT INTO BYPASS (Id, Chaine) VALUES (1, '╔═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·.☽✧    ✦    ✧☾.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·.═══╗');
-   INSERT INTO BYPASS (Id, Chaine) VALUES (2, '✠.·:·..·:·..·:·..·:·.☽✧    ✦    ✧☾.·:·..·:·..·:·..·:·.✠');
-   INSERT INTO BYPASS (Id, Chaine) VALUES (3, '✠.·:·.☽✧    ✦    ✧☾.·:·.✠');
-   INSERT INTO BYPASS (Id, Chaine) VALUES (4, '✠');
-   INSERT INTO BYPASS (Id, Chaine) VALUES (5, '╚═══.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·.☽✧    ✦    ✧☾.·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·..·:·.═══╝');
+   INSERT INTO BYPASS (Id, Chaine) VALUES (1, '╔═══');
+   INSERT INTO BYPASS (Id, Chaine) VALUES (2, '.·:·.');
+   INSERT INTO BYPASS (Id, Chaine) VALUES (3, '═══╗');
+   INSERT INTO BYPASS (Id, Chaine) VALUES (4, '║');
+   INSERT INTO BYPASS (Id, Chaine) VALUES (5, '╚═══');
+   INSERT INTO BYPASS (Id, Chaine) VALUES (6, '═══╝');
