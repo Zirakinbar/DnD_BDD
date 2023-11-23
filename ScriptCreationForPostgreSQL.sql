@@ -1172,6 +1172,8 @@
         Id SERIAL PRIMARY KEY,
         Nom VARCHAR(255) NOT NULL,
         Taille INT DEFAULT 180,
+        Age INT DEFAULT 20,
+        Poids INT DEFAULT 80,
         Alignement VARCHAR(255),
         Description TEXT,
         DateCreation TIMESTAMP DEFAULT current_timestamp,
@@ -1213,7 +1215,7 @@
 
     -- Création de la View pour PJ
     CREATE OR REPLACE VIEW V_PJ AS
-        SELECT P.Id, P.Nom, P.Taille, P.Alignement, P.Description, P.DateCreation, P.Nom_Classe, P.Nom_Race, P.Id_Lieux, PJ.Niveau, PJ.PointDeVie, PJ.PointDeMana, PJ.Experience, PJ.Gold
+        SELECT P.Id, P.Nom, P.Taille, P.Age, P.Poids, P.Alignement, P.Description, P.DateCreation, P.Nom_Classe, P.Nom_Race, P.Id_Lieux, PJ.Niveau, PJ.PointDeVie, PJ.PointDeMana, PJ.Experience, PJ.Gold
         FROM PERSONNAGE P
         JOIN PJ ON P.Id = PJ.Id;
 
@@ -1224,8 +1226,8 @@
         New_Id INT;
     BEGIN
         -- Nouveau PERSONNAGE
-        INSERT INTO PERSONNAGE(Nom, Taille, Alignement, Description, DateCreation, Nom_Classe, Nom_Race, Id_Lieux)
-        VALUES (NEW.Nom, NEW.Taille, NEW.Alignement, NEW.Description, NEW.DateCreation, NEW.Nom_Classe, NEW.Nom_Race, NEW.Id_Lieux)
+        INSERT INTO PERSONNAGE(Nom, Taille, Age, Poids, Alignement, Description, DateCreation, Nom_Classe, Nom_Race, Id_Lieux)
+        VALUES (NEW.Nom, NEW.Taille, NEW.Age, NEW.Poids, NEW.Alignement, NEW.Description, NEW.DateCreation, NEW.Nom_Classe, NEW.Nom_Race, NEW.Id_Lieux)
         RETURNING Id INTO New_Id;
 
         -- Nouveau PJ
@@ -1250,6 +1252,8 @@
         UPDATE PERSONNAGE
         SET Nom = NEW.Nom,
             Taille = NEW.Taille,
+            Age = NEW.Age,
+            Poids = NEW.Poids,
             Alignement = NEW.Alignement,
             Description = NEW.Description,
             DateCreation = NEW.DateCreation,
@@ -1306,7 +1310,7 @@
 
     -- Création de la vue pour PNJ
     CREATE OR REPLACE VIEW V_PNJ AS
-    SELECT P.Id, P.Nom, P.Taille, P.Alignement, P.Description, P.DateCreation, P.Nom_Classe, P.Nom_Race, P.Id_Lieux
+    SELECT P.Id, P.Nom, P.Taille, P.Age, P.Poids, P.Alignement, P.Description, P.DateCreation, P.Nom_Classe, P.Nom_Race, P.Id_Lieux
     FROM PERSONNAGE P
     JOIN PNJ ON P.Id = PNJ.Id;
 
@@ -1317,8 +1321,8 @@
     DECLARE
     BEGIN
         -- Nouveau PERSONNAGE
-        INSERT INTO PERSONNAGE(Nom, Taille, Alignement, Description, DateCreation, Nom_Classe, Nom_Race, Id_Lieux)
-        VALUES (NEW.Nom, NEW.Taille, NEW.Alignement, NEW.Description, NEW.DateCreation, NEW.Nom_Classe, NEW.Nom_Race, NEW.Id_Lieux)
+        INSERT INTO PERSONNAGE(Nom, Taille, Age, Poids, Alignement, Description, DateCreation, Nom_Classe, Nom_Race, Id_Lieux)
+        VALUES (NEW.Nom, NEW.Taille, NEW.Age, NEW.Poids, NEW.Alignement, NEW.Description, NEW.DateCreation, NEW.Nom_Classe, NEW.Nom_Race, NEW.Id_Lieux)
         RETURNING Id INTO New.Id;
 
         -- Nouveau PNJ
@@ -1343,6 +1347,8 @@
         UPDATE PERSONNAGE
         SET Nom = NEW.Nom,
             Taille = NEW.Taille,
+            Age = NEW.Age,
+            Poids = NEW.Poids,
             Alignement = NEW.Alignement,
             Description = NEW.Description,
             DateCreation = NEW.DateCreation,
@@ -1391,7 +1397,7 @@
 
     -- Création de la vue pour ALLIE
     CREATE OR REPLACE VIEW V_ALLIE AS
-    SELECT P.Id, P.Nom, P.Taille, P.Alignement, P.Description, P.DateCreation, P.Nom_Classe, P.Nom_Race, P.Id_Lieux
+    SELECT P.Id, P.Nom, P.Taille, P.Age, P.Poids, P.Alignement, P.Description, P.DateCreation, P.Nom_Classe, P.Nom_Race, P.Id_Lieux
     FROM V_PNJ P
     JOIN ALLIE A ON P.Id = A.Id;
 
@@ -1401,8 +1407,8 @@
     RETURNS TRIGGER AS $$
     BEGIN
         -- Nouveau PNJ
-        INSERT INTO V_PNJ(Nom, Taille, Alignement, Description, DateCreation, Nom_Classe, Nom_Race, Id_Lieux)
-        VALUES (NEW.Nom, NEW.Taille, NEW.Alignement, NEW.Description, NEW.DateCreation, NEW.Nom_Classe, NEW.Nom_Race, NEW.Id_Lieux)
+        INSERT INTO V_PNJ(Nom, Taille, Age, Poids, Alignement, Description, DateCreation, Nom_Classe, Nom_Race, Id_Lieux)
+        VALUES (NEW.Nom, NEW.Taille, NEW.Age, NEW.Poids, NEW.Alignement, NEW.Description, NEW.DateCreation, NEW.Nom_Classe, NEW.Nom_Race, NEW.Id_Lieux)
         RETURNING Id INTO New.Id;
 
         -- Nouveau ALLIE
@@ -1427,6 +1433,8 @@
         UPDATE V_PNJ
         SET Nom = NEW.Nom,
             Taille = NEW.Taille,
+            Age = NEW.Age,
+            Poids = NEW.Poids,
             Alignement = NEW.Alignement,
             Description = NEW.Description,
             DateCreation = NEW.DateCreation,
@@ -1481,7 +1489,7 @@
 
     -- Création de la vue pour MONSTRE
     CREATE OR REPLACE VIEW V_MONSTRE AS
-    SELECT P.Id, P.Nom, P.Taille, P.Alignement, P.Description, P.DateCreation, P.Nom_Classe, P.Nom_Race, P.Id_Lieux, M.Niveau, M.PointDeVie, M.PointDeMana, M.Experience, M.Gold, M.EstBoss
+    SELECT P.Id, P.Nom, P.Taille, P.Age, P.Poids, P.Alignement, P.Description, P.DateCreation, P.Nom_Classe, P.Nom_Race, P.Id_Lieux, M.Niveau, M.PointDeVie, M.PointDeMana, M.Experience, M.Gold, M.EstBoss
     FROM V_PNJ P
     JOIN MONSTRE M ON P.Id = M.Id;
 
@@ -1491,8 +1499,8 @@
     RETURNS TRIGGER AS $$
     BEGIN
         -- Nouveau PNJ
-        INSERT INTO V_PNJ(Nom, Taille, Alignement, Description, DateCreation, Nom_Classe, Nom_Race, Id_Lieux)
-        VALUES (NEW.Nom, NEW.Taille, NEW.Alignement, NEW.Description, NEW.DateCreation, NEW.Nom_Classe, NEW.Nom_Race, NEW.Id_Lieux)
+        INSERT INTO V_PNJ(Nom, Taille, Age, Poids, Alignement, Description, DateCreation, Nom_Classe, Nom_Race, Id_Lieux)
+        VALUES (NEW.Nom, NEW.Taille, NEW.Age, NEW.Poids, NEW.Alignement, NEW.Description, NEW.DateCreation, NEW.Nom_Classe, NEW.Nom_Race, NEW.Id_Lieux)
         RETURNING Id INTO New.Id;
 
         -- Nouveau MONSTRE
@@ -1517,6 +1525,8 @@
         UPDATE V_PNJ
         SET Nom = NEW.Nom,
             Taille = NEW.Taille,
+            Age = NEW.Age,
+            Poids = NEW.Poids,
             Alignement = NEW.Alignement,
             Description = NEW.Description,
             DateCreation = NEW.DateCreation,
@@ -2127,6 +2137,7 @@
    CREATE TABLE INVENTAIRE(
       Id_Personnage INT,
       Id_Item INT,
+      Qte INT DEFAULT 1,
       PRIMARY KEY(Id_Personnage, Id_Item),
       CONSTRAINT fk_personnage_inventaire FOREIGN KEY(Id_Personnage) REFERENCES PERSONNAGE(Id),
       CONSTRAINT fk_item_inventaire FOREIGN KEY(Id_Item) REFERENCES ITEM(Id)
